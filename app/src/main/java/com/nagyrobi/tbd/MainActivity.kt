@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nagyrobi.tbd.ui.theme.SSISDKTheme
+import com.nagyrobi.tbd.util.toStringList
 import mobile.Mobile
 
 class MainActivity : ComponentActivity() {
@@ -40,7 +41,7 @@ fun DidExample() {
     var selectedIndex by remember { mutableStateOf(0) }
     val keyTypes = getKeyTypes()
     val selectedKeyType = keyTypes[selectedIndex]
-    val didKey = Mobile.generateDidKey(selectedKeyType).didKey
+    val didKey = Mobile.generateDIDKey(selectedKeyType).didKey
     val did = didKey?.let { Mobile.expandDIDKey(it)?.decodeToString() }
 
     Column(
@@ -86,13 +87,7 @@ fun DidExample() {
     }
 }
 
-fun getKeyTypes() = Mobile.getSupportedKeyTypes()
-    .decodeToString()
-    .replace("[", "")
-    .replace("]", "")
-    .replace("\"", "")
-    .split(",")
-
+fun getKeyTypes() = Mobile.getSupportedKeyTypes().toStringList()
 
 @Preview(showBackground = true)
 @Composable
