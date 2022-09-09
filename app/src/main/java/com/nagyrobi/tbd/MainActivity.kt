@@ -42,7 +42,7 @@ fun DidExample() {
     val keyTypes = getKeyTypes()
     val selectedKeyType = keyTypes[selectedIndex]
     val didKey = Mobile.generateDIDKey(selectedKeyType).didKey
-    val did = didKey?.let { Mobile.expandDIDKey(it)?.decodeToString() }
+    val did = didKey?.let { Mobile.expandDIDKey(it)?.alsoKnownAs }
 
     Column(
         modifier = Modifier
